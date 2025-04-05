@@ -55,7 +55,7 @@ export default function Dashboard() {
       setLoading(true)
       setError(null)
 
-      const response = await fetch("/api/binance", {
+      const response = await fetch("/api/coingecko", {
         method: "GET",
         headers: {
           "Cache-Control": "no-cache",
@@ -322,7 +322,7 @@ export default function Dashboard() {
             Note: Les empreintes carbone sont des estimations basées sur le type de consensus, le volume d'échange et
             d'autres facteurs.
           </p>
-          <p>Les données sont actualisées en temps réel depuis Binance.</p>
+          <p>Les données sont actualisées en temps réel depuis coingecko.</p>
           <p className="mt-2 font-medium">Total: {filteredCryptos.length} cryptomonnaies</p>
         </div>
       </div>

@@ -13,7 +13,7 @@ type Crypto = {
   price: number
   change: number
   volume: number
-  carbonFootprint: string
+  carbonFootprint: number
   color: string
   iconUrl: string
 }
@@ -51,6 +51,19 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   const currentCryptos = cryptos.slice(startIndex, endIndex)
+
+  // Function to convert large numbers into human-readable format
+  const convertToHumanReadable = (number) => {
+    const suffixes = ["", "Thousand", "Million", "Billion", "Trillion"]; // Thousand, Million, Billion, Trillion
+    let magnitude = 0;
+
+    while (Math.abs(number) >= 1000 && magnitude < suffixes.length - 1) {
+      magnitude += 1;
+      number /= 1000.0;
+    }
+
+    return `${number.toFixed(2)} ${suffixes[magnitude]} CO₂`;
+  };
 
   return (
     <motion.div variants={container} initial="hidden" animate="show">
@@ -145,7 +158,6 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
                 <TableCell className="font-medium">
                   <div className="flex items-center">
                     <div className="w-6 h-6 mr-2 relative">
-                      <div className="w-6 h-6 rounded-full" style={{ backgroundColor: crypto.color }}></div>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <img
                           src={crypto.iconUrl || "/placeholder.svg"}
@@ -183,10 +195,10 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
                     {Math.abs(crypto.change).toFixed(2)}%
                   </div>
                 </TableCell>
-                <TableCell className="font-mono">${(crypto.volume / 1000000).toFixed(1)}M</TableCell>
+                <TableCell className="font-mono">{(crypto.volume / 1000000).toFixed(1)}M</TableCell>
                 <TableCell>
                   <div className="flex items-center">
-                    {crypto.carbonFootprint}
+                    {convertToHumanReadable(crypto.carbonFootprint * crypto.volume)}
                   </div>
                 </TableCell>
               </motion.tr>

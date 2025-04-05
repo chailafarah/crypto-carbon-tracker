@@ -78,13 +78,12 @@ export function CryptoPortfolioForm({ cryptos }: CryptoPortfolioFormProps) {
 
     const carbon = portfolio.reduce((sum, item) => {
       const cryptoData = cryptos.find((c) => c.symbol === item.symbol)
-      const carbonFootprintValue = Number(cryptoData?.carbonFootprint.split(" ")[0])
+      const carbonFootprintValue = Number(cryptoData?.carbonFootprint)
 
       const carbonFootprint = carbonFootprintValue || 0
       return sum + item.amount * carbonFootprint
     }, 0)
 
-    console.log(portfolio)
     setTotalValue(value)
     setTotalCarbonFootprint(carbon)
   }, [portfolio, cryptos])
@@ -250,7 +249,15 @@ export function CryptoPortfolioForm({ cryptos }: CryptoPortfolioFormProps) {
                             className="flex items-center px-2 py-1.5 text-sm"
                           >
                             <div className="w-4 h-4 mr-2 relative">
-                              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: crypto.color }}></div>
+                              <img
+                                src={crypto.iconUrl || "/placeholder.svg"}
+                                alt={crypto.symbol}
+                                className="w-4 h-4 object-contain"
+                                onError={(e) => {
+                                  // Fallback si l'icône ne charge pas
+                                  e.currentTarget.style.display = "none"
+                                }}
+                              />
                             </div>
                             <span>
                               {crypto.symbol} - {crypto.name}
