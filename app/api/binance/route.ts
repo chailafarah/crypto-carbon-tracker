@@ -8,7 +8,7 @@ function estimateCarbonFootprint(symbol: string, volume: number, marketCap: numb
 
   // Consommation en TWh
   // https://ccaf.io/cbnsi/cbeci
-  const consumption = isPoW ? 150 : 10
+  const consumption = isPoW ? 174 : 5.88
   // https://www.eea.europa.eu/en/analysis/maps-and-charts/co2-emission-intensity-15
   const co2PerKWh = 200;
 

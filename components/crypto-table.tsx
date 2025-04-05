@@ -186,14 +186,6 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
                 <TableCell className="font-mono">${(crypto.volume / 1000000).toFixed(1)}M</TableCell>
                 <TableCell>
                   <div className="flex items-center">
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mr-2">
-                      <div
-                        className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full"
-                        style={{
-                          width: `${Math.min(100, Number.parseInt(crypto.carbonFootprint) / 4)}%`,
-                        }}
-                      />
-                    </div>
                     {crypto.carbonFootprint}
                   </div>
                 </TableCell>

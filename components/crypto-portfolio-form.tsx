@@ -423,45 +423,6 @@ export function CryptoPortfolioForm({ cryptos }: CryptoPortfolioFormProps) {
           )}
         </div>
       </CardContent>
-
-      <CardFooter className="bg-emerald-50 border-t border-emerald-100 p-4">
-        <Collapsible open={isHelpOpen} onOpenChange={setIsHelpOpen} className="w-full">
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" className="flex items-center w-full justify-between text-emerald-700">
-              <div className="flex items-center">
-                <HelpCircle className="h-4 w-4 mr-2" />
-                <span>Comment les calculs sont-ils effectués?</span>
-              </div>
-              <ChevronRight className={`h-4 w-4 transition-transform ${isHelpOpen ? "rotate-90" : ""}`} />
-            </Button>
-          </CollapsibleTrigger>
-          <CollapsibleContent className="mt-2 text-sm text-emerald-700 space-y-2">
-            <p>L'empreinte carbone des cryptomonnaies est calculée en fonction de plusieurs facteurs:</p>
-            <ul className="list-disc list-inside space-y-1 pl-2">
-              <li>
-                <strong>Mécanisme de consensus</strong>: Les cryptomonnaies utilisant le Proof of Work (comme Bitcoin)
-                consomment beaucoup plus d'énergie que celles utilisant le Proof of Stake (comme Solana ou Cardano).
-              </li>
-              <li>
-                <strong>Volume de transactions</strong>: Plus une blockchain traite de transactions, plus sa
-                consommation énergétique est élevée.
-              </li>
-              <li>
-                <strong>Infrastructure réseau</strong>: Le nombre et la distribution des nœuds influencent également
-                l'empreinte carbone.
-              </li>
-            </ul>
-            <p>
-              Les estimations sont basées sur des études académiques et des rapports d'organisations spécialisées dans
-              l'analyse de l'impact environnemental des technologies blockchain.
-            </p>
-            <p className="font-medium">
-              Note: Ces estimations sont approximatives et peuvent varier en fonction de l'évolution des technologies et
-              des sources d'énergie utilisées pour le minage et la validation des transactions.
-            </p>
-          </CollapsibleContent>
-        </Collapsible>
-      </CardFooter>
     </Card>
   )
 }
