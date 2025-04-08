@@ -71,29 +71,29 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
         <TableHeader>
           <TableRow>
             <TableHead className="w-[180px]">
-              <Button variant="ghost" className="font-medium" onClick={() => onSort("name")}>
+              <Button variant="ghost" size="sort" className="font-medium" onClick={() => onSort("name")}>
                 Nom <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>Symbole</TableHead>
             <TableHead>
-              <Button variant="ghost" className="font-medium" onClick={() => onSort("price")}>
+              <Button variant="ghost" size="sort" className="font-medium" onClick={() => onSort("price")}>
                 Prix ($) <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" className="font-medium" onClick={() => onSort("change")}>
+              <Button variant="ghost"  size="sort" className="font-medium" onClick={() => onSort("change")}>
                 Variation <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" className="font-medium" onClick={() => onSort("volume")}>
+              <Button variant="ghost" size="sort"  className="font-medium" onClick={() => onSort("volume")}>
                 Volume <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
               <div className="flex items-center">
-                <Button variant="ghost" className="font-medium" onClick={() => onSort("carbonFootprint")}>
+                <Button variant="ghost" size="sort" className="font-medium" onClick={() => onSort("carbonFootprint")}>
                   Empreinte Carbone <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
                 <TooltipProvider>
