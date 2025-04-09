@@ -54,46 +54,71 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
 
   // Function to convert large numbers into human-readable format
   const convertToHumanReadable = (number) => {
-    const suffixes = ["", "Thousand", "Million", "Billion", "Trillion"]; // Thousand, Million, Billion, Trillion
-    let magnitude = 0;
+    const suffixes = ["", "Thousand", "Million", "Billion", "Trillion"] // Thousand, Million, Billion, Trillion
+    let magnitude = 0
 
     while (Math.abs(number) >= 1000 && magnitude < suffixes.length - 1) {
-      magnitude += 1;
-      number /= 1000.0;
+      magnitude += 1
+      number /= 1000.0
     }
 
-    return `${number.toFixed(2)} ${suffixes[magnitude]} CO₂`;
-  };
+    return `${number.toFixed(2)} ${suffixes[magnitude]} CO₂`
+  }
 
   return (
-    <motion.div variants={container} initial="hidden" animate="show">
+    <motion.div variants={container} initial="hidden" animate="show" className="rounded-lg border overflow-hidden">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-gray-50 dark:bg-gray-800">
           <TableRow>
             <TableHead className="w-[180px]">
-              <Button variant="ghost" size="sort" className="font-medium" onClick={() => onSort("name")}>
+              <Button
+                variant="ghost"
+                size="sort"
+                className="font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => onSort("name")}
+              >
                 Nom <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>Symbole</TableHead>
             <TableHead>
-              <Button variant="ghost" size="sort" className="font-medium" onClick={() => onSort("price")}>
+              <Button
+                variant="ghost"
+                size="sort"
+                className="font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => onSort("price")}
+              >
                 Prix ($) <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost"  size="sort" className="font-medium" onClick={() => onSort("change")}>
+              <Button
+                variant="ghost"
+                size="sort"
+                className="font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => onSort("change")}
+              >
                 Variation <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" size="sort"  className="font-medium" onClick={() => onSort("volume")}>
-                Volume <ArrowUpDown className="ml-2 h-4 w-4" />
+              <Button
+                variant="ghost"
+                size="sort"
+                className="font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => onSort("volume")}
+              >
+                Total Supply <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
               <div className="flex items-center">
-                <Button variant="ghost" size="sort" className="font-medium" onClick={() => onSort("carbonFootprint")}>
+                <Button
+                  variant="ghost"
+                  size="sort"
+                  className="font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => onSort("carbonFootprint")}
+                >
                   Empreinte Carbone <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
                 <TooltipProvider>
@@ -151,13 +176,13 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
               <motion.tr
                 key={crypto.symbol}
                 variants={item}
-                className="hover:bg-gray-50 transition-colors"
+                className="border-b hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                 whileHover={{ scale: 1.005 }} // Animation plus légère pour de meilleures performances
                 custom={index}
               >
                 <TableCell className="font-medium">
                   <div className="flex items-center">
-                    <div className="w-6 h-6 mr-2 relative">
+                    <div className="w-6 h-6 mr-2 relative bg-white rounded-full shadow-sm overflow-hidden">
                       <div className="absolute inset-0 flex items-center justify-center">
                         <img
                           src={crypto.iconUrl || "/placeholder.svg"}
@@ -170,7 +195,7 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
                         />
                       </div>
                     </div>
-                    {crypto.name}
+                    <span className="font-medium">{crypto.name}</span>
                   </div>
                 </TableCell>
                 <TableCell className="font-mono">{crypto.symbol}</TableCell>
@@ -186,18 +211,24 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
                         })}
                 </TableCell>
                 <TableCell>
-                  <div className={`flex items-center ${crypto.change > 0 ? "text-green-600" : "text-red-600"}`}>
+                  <div
+                    className={`flex items-center rounded-full px-2 py-1 text-xs font-medium ${
+                      crypto.change > 0
+                        ? "text-green-600 bg-green-50 dark:bg-green-900/20"
+                        : "text-red-600 bg-red-50 dark:bg-red-900/20"
+                    }`}
+                  >
                     {crypto.change > 0 ? (
-                      <TrendingUp className="mr-1 h-4 w-4" />
+                      <TrendingUp className="mr-1 h-3 w-3" />
                     ) : (
-                      <TrendingDown className="mr-1 h-4 w-4" />
+                      <TrendingDown className="mr-1 h-3 w-3" />
                     )}
                     {Math.abs(crypto.change).toFixed(2)}%
                   </div>
                 </TableCell>
                 <TableCell className="font-mono">{(crypto.volume / 1000000).toFixed(1)}M</TableCell>
                 <TableCell>
-                  <div className="flex items-center">
+                  <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
                     {convertToHumanReadable(crypto.carbonFootprint * crypto.volume)}
                   </div>
                 </TableCell>
@@ -209,4 +240,3 @@ export function CryptoTable({ cryptos, loading, onSort, sortConfig, itemsPerPage
     </motion.div>
   )
 }
-
